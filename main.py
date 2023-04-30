@@ -18,7 +18,7 @@ def loginMySAT():
     sleep(2)
     elementIdpUsername = driver.find_element(By.XPATH, '//*[@id="idp-discovery-username"]') # Identify username inout field
     elementIdpUsername.clear()
-    elementIdpUsername.send_keys("***@gmail.com") # Enter required email, to be prompted in next update if required
+    elementIdpUsername.send_keys("x***l@gmail.com") # Enter required email, to be prompted in next update if required
     
     try:
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="idp-discovery-submit"]'))).click() # Trigger click event on Next "submit" type button after entering email
@@ -29,7 +29,7 @@ def loginMySAT():
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="okta-signin-password"]')))
         elementIdpPasswd = driver.find_element(By.XPATH, '//*[@id="okta-signin-password"]') # Identify Password input field
         elementIdpPasswd.clear()
-        elementIdpPasswd.send_keys("***") # Enter required password TODO: remove password before pushing to GitHub!!!!!!
+        elementIdpPasswd.send_keys("R***") # Enter required password TODO: remove password before pushing to GitHub!!!!!!
         driver.find_element(By.XPATH, '//*[@id="okta-signin-submit"]').click() # Trigger click event to submit password and email
         #print(driver.title)
 
@@ -45,8 +45,8 @@ def satreg():
     except ElementClickInterceptedException:
         WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler"))).click()
         WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div[2]/div/div[2]/div/div[6]/div/div/div[3]/div/div/div[2]/div[2]/button'))).click()
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="graddate-save-button"]'))).click()
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="grade-save-button"]'))).click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="qc-id-personalinfo-button-graddateconfirm"]'))).click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="qc-id-personalinfo-button-gradeconfirm"]'))).click()
     sleep(5)
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="continue-to-demographics-btn"]'))).click()
     sleep(5)
@@ -104,9 +104,10 @@ def checkSchools(counter: str):
         Message = "\n".join(Message)
         print(Message)
         if previous == 0:
-            print(tgmessage.telegram_sendmessage(***, Message))
-            print(tgmessage.telegram_sendmessage(***, Message))
-            print(tgmessage.telegram_sendmessage(***, Message))
+            print(tgmessage.telegram_sendmessage(976908358, Message))
+            print(tgmessage.telegram_sendmessage(5670908383, Message))
+            print(tgmessage.telegram_sendmessage(584098198, Message))
+            print(tgmessage.telegram_sendmessage(853226047, Message))
             print("Email sent, sleeping...")
     previous = (int)(schoolcount.stripresult(jun_3))
     
@@ -116,6 +117,9 @@ op = webdriver.ChromeOptions()
 op.add_argument("--disable-browser-side-navigation")
 op.add_argument("--no-sandbox")
 op.add_argument("--disable-dev-shm-usage")
+counter = 0
+#logincreds = [[]] # logincreds[iterator][0] - email; logincreds[iterator][1]
+iterator = 0
 while(1):
     try:
         driver = WD.Chrome(options=op)
@@ -139,6 +143,11 @@ while(1):
         print("Restarting the loop")
     except TimeoutException:
         print(TimeoutException)
+        print(tgmessage.telegram_sendmessage(5670908383, f"{ctime(time())}, {TimeoutException}"))
+        continue
+    except:
+        print("Unknown error")
+        print(tgmessage.telegram_sendmessage(5670908383, f"{ctime(time())}, Unknown error occured, check server!"))
         continue
     #except ElementClickInterceptedException:
     #    print(ElementClickInterceptedException)
